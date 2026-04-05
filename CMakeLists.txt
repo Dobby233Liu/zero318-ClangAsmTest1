@@ -732,11 +732,11 @@ target_link_libraries(${EXE} "dsound.lib" "dinput8.lib" "dxguid.lib" "d3d9.lib")
 # For increased sanity I could make these discovered through find_package, but this is ok
 # for now
 
-include_directories(SYSTEM "dobby/d3dx/include")
+include_directories(SYSTEM "dobby/d3dx9/include")
 if(IS_X64)
-target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x64")
+target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx9/release/lib/x64")
 else()
-target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x86")
+target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx9/release/lib/x86")
 endif()
 target_link_libraries(${EXE} "d3dx9.lib")
 
