@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 #set(CMAKE_CXX_STANDARD 23)
 
-set(CMAKE_IS_BROKEN TRUE CACHE BOOL "bad build environment")
+set(CMAKE_IS_BROKEN TRUE CACHE BOOL "Is user under zero's build environment?")
 
 project ("ClangAsmTest1")
 
@@ -884,9 +884,13 @@ target_sources(ntoskrnl_tests PRIVATE
 	"dummy_main.cpp"
 	$<TARGET_OBJECTS:ntoskrnl_test_asm>
 	"x86_msrs.h"
-	#"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
 	"windows_kernel_test.cpp"
 )
+if(CMAKE_IS_BROKEN)
+target_sources(ntoskrnl_tests PRIVATE
+	"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
+)
+endif()
 if(IS_X64)
 target_compile_options(ntoskrnl_tests PRIVATE
 	-march=x86-64
@@ -907,9 +911,13 @@ target_sources(winload_tests PRIVATE
 	"dummy_main.cpp"
 	#$<TARGET_OBJECTS:winload_test_asm>
 	"x86_msrs.h"
-	#"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
 	"winload_test.cpp"
 )
+if(CMAKE_IS_BROKEN)
+target_sources(winload_tests PRIVATE
+	"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
+)
+endif()
 if(IS_X64)
 target_compile_options(winload_tests PRIVATE
 	-march=x86-64

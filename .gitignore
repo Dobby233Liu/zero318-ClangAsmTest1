@@ -4,3 +4,4 @@ out/
 zero_private/
 UM/test_scripts/data
 __cmake_systeminformation/
+dobby/changes.diff
