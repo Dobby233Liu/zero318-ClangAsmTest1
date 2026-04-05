@@ -14,7 +14,6 @@
     "buildPresets": [
         {
             "name": "UMTest1-dobby",
-            "inherits": ["base"],
             "configurePreset": "x86-Clang-Release-Debug-dobby",
             "targets": "UMTest1"
         }

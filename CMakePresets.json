@@ -7,22 +7,35 @@
             "binaryDir": "${sourceDir}/out/build",
             "installDir": "${sourceDir}/out/install",
             "cacheVariables": {
-                "CMAKE_IS_BROKEN": "false"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
+                "CMAKE_IS_BROKEN": "false",
+                "CMAKE_SYSTEM_NAME": "Windows",
+                "CMAKE_SYSTEM_VERSION": "10.0.20348.0",
+                "CMAKE_VS_PLATFORM_TOOLSET_VERSION": "14.29.30133"
             }
         },
         {
-            "name": "x86-Clang-Release-Debug",
-            "inherits": ["base"],
+            "name": "x86",
+            "hidden": true,
             "cacheVariables": {
-                "IS_X64": "false",
+                "CMAKE_SYSTEM_PROCESSOR": "X86",
+                "IS_X64": "false"
+            }
+        },
+        {
+            "name": "ClangCl",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER_FRONTEND_VARIANT": "MSVC",
+                "CMAKE_CXX_COMPILER_FRONTEND_VARIANT": "MSVC",
                 "CLANG_TYPE": "CLANG-CL",
-                "CUSTOM_CLANG": "false",
-                "CMAKE_SYSTEM_VERSION": "10.0.20348.0",
+                "CUSTOM_CLANG": "false"
+            }
+        },
+        {
+            "name": "Release-Debug",
+            "inherits": ["base"],
+            "hidden": true,
+            "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "/MT /Zi /O2 /Ob2 /DNDEBUG",
                 "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/MT /Zi /O2 /Ob2 /DNDEBUG",
@@ -31,35 +44,26 @@
             }
         },
         {
-            "name": "GNUmake-x86-Clang",
+            "name": "x86-Clang-Release-Debug",
+            "inherits": ["x86", "ClangCl", "Release-Debug"]
+        },
+        {
+            "name": "GNUmake",
             "hidden": true,
             "generator": "MinGW Makefiles",
             "toolchainFile": "dobby/WindowsToolchain/Windows.Clang.toolchain.cmake",
             "cacheVariables": {
-                "CMAKE_SYSTEM_PROCESSOR": "X86",
-                "VS_PLATFORM_TOOLSET_VERSION": "14.29.30133",
-                "CMAKE_C_COMPILER_FRONTEND_VARIANT": "MSVC",
-                "CMAKE_CXX_COMPILER_FRONTEND_VARIANT": "MSVC"
+                "VS_PLATFORM_TOOLSET_VERSION": "14.29.30133"
             }
         },
         {
             "name": "x86-Clang-Release-Debug-GNUmake",
-            "inherits": ["x86-Clang-Release-Debug", "GNUmake-x86-Clang"]
+            "inherits": ["x86-Clang-Release-Debug", "GNUmake"]
         }
     ],
     "buildPresets": [
         {
-            "name": "base",
-            "hidden": true,
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            }
-        },
-        {
             "name": "UMTest1",
-            "inherits": ["base"],
             "configurePreset": "x86-Clang-Release-Debug-GNUmake",
             "targets": "UMTest1"
         }
