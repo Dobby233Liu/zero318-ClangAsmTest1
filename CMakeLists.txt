@@ -729,16 +729,15 @@ target_link_libraries(${EXE} "winmm.lib")
 
 target_link_libraries(${EXE} "dsound.lib" "dinput8.lib" "dxguid.lib" "d3d9.lib")
 
-target_include_directories(${EXE} PRIVATE "dobby/d3dx/include")
+include_directories(SYSTEM "dobby/d3dx/include")
 if(IS_X64)
 target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x64")
 else()
 target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x86")
-target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3d8/Lib/x86")
 endif()
 target_link_libraries(${EXE} "d3dx9.lib")
 
-target_include_directories(${EXE} PRIVATE "dobby/d3d8/Include")
+include_directories(SYSTEM "dobby/d3d8/Include")
 if(NOT IS_X64)
 target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3d8/Lib/x86")
 target_link_libraries(${EXE} "d3d8.lib")
