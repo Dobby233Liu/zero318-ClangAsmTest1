@@ -46,6 +46,8 @@
 #
 include_guard()
 
+include("${CMAKE_CURRENT_LIST_DIR}/WSL.cmake")
+
 if(NOT CMAKE_SYSTEM_VERSION)
     set(CMAKE_SYSTEM_VERSION ${CMAKE_HOST_SYSTEM_VERSION})
 endif()
@@ -59,9 +61,15 @@ if(NOT CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE)
 endif()
 
 if(NOT CMAKE_WINDOWS_KITS_10_DIR)
-    get_filename_component(CMAKE_WINDOWS_KITS_10_DIR "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v10.0;InstallationFolder]" ABSOLUTE CACHE)
-    if ("${CMAKE_WINDOWS_KITS_10_DIR}" STREQUAL "/registry")
-        unset(CMAKE_WINDOWS_KITS_10_DIR)
+    if((CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux") AND (EXISTS "/usr/bin/wslpath"))
+        toolchain_read_reg_string("HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Microsoft SDKs\\Windows\\v10.0" "InstallationFolder" CMAKE_WINDOWS_KITS_10_DIR)
+        message(VERBOSE "Windows.Kits: CMAKE_WINDOWS_KITS_10_DIR (WSL) = ${CMAKE_WINDOWS_KITS_10_DIR}")
+        toolchain_to_wsl_path("${CMAKE_WINDOWS_KITS_10_DIR}" CMAKE_WINDOWS_KITS_10_DIR)
+    else()
+        get_filename_component(CMAKE_WINDOWS_KITS_10_DIR "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v10.0;InstallationFolder]" ABSOLUTE CACHE)
+        if ("${CMAKE_WINDOWS_KITS_10_DIR}" STREQUAL "/registry")
+            unset(CMAKE_WINDOWS_KITS_10_DIR)
+        endif()
     endif()
 endif()
 

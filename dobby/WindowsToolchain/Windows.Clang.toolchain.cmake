@@ -106,6 +106,8 @@ if(NOT CMAKE_VS_VERSION_RANGE)
     set(CMAKE_VS_VERSION_RANGE "[16.0,)")
 endif()
 
+include("${CMAKE_CURRENT_LIST_DIR}/VSWhere.cmake")
+
 if(NOT CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE)
     if(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL ARM64)
         set(CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE arm64)
@@ -139,6 +141,11 @@ if(NOT VS_INSTALLATION_PATH)
                 installationVersion VS_INSTALLATION_VERSION
                 installationPath VS_INSTALLATION_PATH
         )
+    endif()
+
+    if((CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux") AND (EXISTS "/usr/bin/wslpath"))
+        # Path properties returned by VSWhere are Windows-style paths. Convert to WSL-style paths on WSL.
+        toolchain_to_wsl_path("${VS_INSTALLATION_PATH}" VS_INSTALLATION_PATH)
     endif()
 endif()
 

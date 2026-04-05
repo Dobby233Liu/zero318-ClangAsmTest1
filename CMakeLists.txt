@@ -692,9 +692,7 @@ target_link_libraries(${EXE} "F:\\Program Files\\LLVM\\lib\\clang\\17\\lib\\wind
 else()
 #target_link_libraries(${EXE} "F:\\Users\\zero318\\Source\\Repos\\ClangAsmTest1\\ntdll32.lib")
 if (NOT NO_STDLIB)
-if(CMAKE_IS_BROKEN)
 target_link_libraries(${EXE} "C:\\WinDDK\\7600.16385.1\\lib\\wxp\\i386\\winmm.lib")
-endif()
 endif()
 target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20262.0\\ucrt\\x86")
 target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20262.0\\um\\x86")
@@ -1050,8 +1048,6 @@ target_link_options(UMTest1 PRIVATE
 
 if(CMAKE_IS_BROKEN)
 target_link_libraries(UMTest1 "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\dsound.lib")
-else()
-target_link_libraries(UMTest1 "dsound.lib")
 endif()
 if(NOT STATIC_CSOUND)
 #target_link_libraries(UMTest1 CSoundLib)

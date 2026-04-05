@@ -1,9 +1,0 @@
-set(VS_INSTALLATION_PATH "D:/tools/Program Files/Microsoft Visual Studio/2022/BuildTools")
-set(CMAKE_VS_VERSION_RANGE "[16.0,17.0)")
-set(VS_PLATFORM_TOOLSET_VERSION "14.29.30133")
-set(CMAKE_SYSTEM_PROCESSOR X86)
-set(CMAKE_C_COMPILER_FRONTEND_VARIANT MSVC)
-set(CMAKE_CXX_COMPILER_FRONTEND_VARIANT MSVC)
-include("${CMAKE_CURRENT_LIST_DIR}/WindowsToolchain/Windows.Clang.toolchain.cmake")
-
-set(CMAKE_ASM-ATT_COMPILER "D:/sdks/w64devkit-x86/bin/as.exe")
