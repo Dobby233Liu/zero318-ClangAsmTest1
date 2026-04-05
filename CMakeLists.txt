@@ -649,29 +649,24 @@ target_compile_options(${EXE} PRIVATE
 #set(CMAKE_LINKER "F:\\Program Files (x86)\\LLVM\\bin\\ld.lld.exe")
 
 if(CMAKE_IS_BROKEN)
-#include_directories("F:\\Program Files (x86)\\LLVM\\lib\\clang\\12.0.0\\include")
-#include_directories("F:\\Program Files\\LLVM\\lib\\clang\\13.0.0\\include")
-#include_directories("F:\\Program Files\\LLVM\\lib\\clang\\14.0.0\\include")
-#include_directories(SYSTEM "F:\\Program Files\\LLVM\\lib\\clang\\15.0.2\\include")
-include_directories(BEFORE SYSTEM "F:\\Users\\zero318\\Source\\Repos\\ClangAsmTest1\\zero_include")
-#include_directories(SYSTEM "F:\\Program Files\\LLVM\\lib\\clang\\16\\include")
-include_directories(SYSTEM "F:\\Program Files\\LLVM\\lib\\clang\\17\\include")
+include_directories(BEFORE SYSTEM "zero_include/")
+#include_directories(SYSTEM "F:\\Program Files\\LLVM\\lib\\clang\\17\\include")
 include_directories(SYSTEM "C:\\WinDDK\\7600.16385.1\\inc\\ddk")
 include_directories(SYSTEM "F:\\MyCodeLibs\\SoundSample\\Sample\\DXUT")
-include_directories(SYSTEM "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Include")
-include_directories(SYSTEM "F:\\My Programs Expansion\\DirectX_SDKs\\8.0a\\include")
+include_directories(SYSTEM "dobby/d3dx/include")
+include_directories(SYSTEM "dobby/d3d8/Include")
 include_directories(SYSTEM "C:\\Program Files (x86)\\Microsoft Speech SDK\\Include")
 include_directories(SYSTEM "F:\\MyCodeLibs\\boost\\install\\boost_1_82_0\\boost_1_82_0\\")
 #if(NOT MSVC)
 include_directories(AFTER SYSTEM
-	"F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\ATLMFC\\include"
-	"F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include"
+	"D:\\tools\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.29.30133\\ATLMFC\\include"
+	"D:\\tools\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include"
 	"C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\include\\um"
-	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20262.0\\ucrt"
-	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20262.0\\shared"
-	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20262.0\\um"
-	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20262.0\\winrt"
-	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20262.0\\cppwinrt"
+	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\ucrt"
+	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\shared"
+	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\um"
+	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\winrt"
+	"C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.20348.0\\cppwinrt"
 )
 #endif()
 include_directories(AFTER SYSTEM
@@ -685,33 +680,31 @@ include_directories(AFTER SYSTEM
 #target_link_libraries(${EXE} "C:\\WinDDK\\7600.16385.1\\lib\\wxp\\i386\\ntdll.lib")
 if (IS_X64)
 #target_link_libraries(${EXE} "C:\\WinDDK\\7600.16385.1\\lib\\win7\\amd64\\winmm.lib")
-target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20262.0\\ucrt\\x64")
+target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20348.0\\ucrt\\x64")
 target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Lib\\x64")
-#target_link_options(${EXE} PRIVATE "/libpath:\"C/Program Files (x86)/Windows Kits/10/Lib/10.0.20262.0/ucrt/x64/\"")
+#target_link_options(${EXE} PRIVATE "/libpath:\"C/Program Files (x86)/Windows Kits/10/Lib/10.0.20348.0/ucrt/x64/\"")
 target_link_libraries(${EXE} "F:\\Program Files\\LLVM\\lib\\clang\\17\\lib\\windows\\clang_rt.builtins-x86_64.lib")
 else()
-#target_link_libraries(${EXE} "F:\\Users\\zero318\\Source\\Repos\\ClangAsmTest1\\ntdll32.lib")
+#target_link_libraries(${EXE} "./ntdll32.lib")
 if (NOT NO_STDLIB)
-target_link_libraries(${EXE} "C:\\WinDDK\\7600.16385.1\\lib\\wxp\\i386\\winmm.lib")
+target_link_libraries(${EXE} "winmm.lib")
 endif()
-target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20262.0\\ucrt\\x86")
-target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20262.0\\um\\x86")
+target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20348.0\\ucrt\\x86")
+target_link_directories(${EXE} PRIVATE "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.20348.0\\um\\x86")
 endif()
 
 if (NOT NO_STDLIB)
+target_link_libraries(${EXE} "dsound.lib")
+target_link_libraries(${EXE} "dinput8.lib")
+target_link_libraries(${EXE} "dxguid.lib")
+target_link_libraries(${EXE} "d3d9.lib")
+target_link_libraries(${EXE} "d3dx9.lib")
 if (IS_X64)
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x64\\dsound.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x64\\dinput8.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x64\\dxguid.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x64\\d3d9.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x64\\d3dx9.lib")
+target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x64")
 else()
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\dsound.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\dinput8.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\dxguid.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\d3d9.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\d3dx9.lib")
-target_link_libraries(${EXE} "F:\\My Programs Expansion\\DirectX_SDKs\\8.0a\\lib\\d3d8.lib")
+target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3dx/release/lib/x86")
+target_link_directories(${EXE} PRIVATE "${CMAKE_SOURCE_DIR}/dobby/d3d8/Lib/x86")
+target_link_libraries(${EXE} "d3d8.lib")
 #target_link_libraries(${EXE} DummyDLL)
 endif()
 
@@ -862,7 +855,7 @@ target_sources(ntoskrnl_tests PRIVATE
 	"dummy_main.cpp"
 	$<TARGET_OBJECTS:ntoskrnl_test_asm>
 	"x86_msrs.h"
-	"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
+	#"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
 	"windows_kernel_test.cpp"
 )
 if(IS_X64)
@@ -885,7 +878,7 @@ target_sources(winload_tests PRIVATE
 	"dummy_main.cpp"
 	#$<TARGET_OBJECTS:winload_test_asm>
 	"x86_msrs.h"
-	"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
+	#"F:/My Hacking Stuff Expansion/windows/ntoskrnl_structs.h"
 	"winload_test.cpp"
 )
 if(IS_X64)
@@ -992,6 +985,7 @@ target_sources(UMTest1 PRIVATE
 	"UM/UMTest1.rc"
 	#"UM/new_header_test.cpp"
 )
+add_dependencies(UMTest1 UMAsm)
 target_compile_definitions(UMTest1 PRIVATE
 	NO_ASM_SYMBOLS
 	#ZUNListIdkDefault=true
@@ -1018,11 +1012,12 @@ target_link_options(UMTest1 PRIVATE
 	"LINKER:/subsystem:windows"
 	"LINKER:/fixed"
 	"LINKER:/base:0x400000"
+	"LINKER:/dynamicbase:no"
 	#"LINKER:/base:0x800000"
 	#/VERBOSE:LIB
 )
 
-target_link_libraries(UMTest1 "F:\\My Programs Expansion\\DirectX_SDKs\\Hopefully_Current\\Lib\\x86\\dsound.lib")
+target_link_libraries(UMTest1 "dsound.lib")
 if(NOT STATIC_CSOUND)
 #target_link_libraries(UMTest1 CSoundLib)
 endif()
@@ -1123,7 +1118,7 @@ target_compile_definitions(smallest_pe_file PRIVATE
 )
 target_link_options(smallest_pe_file PRIVATE
 	/ENTRY:yeet
-	#"/STUB:F:\\Users\\zero318\\Source\\Repos\\ClangAsmTest1\\empty_dos_stub.exe"
+	#"/STUB:.\\empty_dos_stub.exe"
 	#/emittoolversioninfo:no
 	#"LINKER:/fixed"
 	-nodefaultlib
@@ -1408,9 +1403,9 @@ target_compile_definitions(glaux PRIVATE
 	#_M_IX86=1
 	DONT_COMPILE_REGISTER_ASSUME_JANK=1
 )
-target_include_directories(glaux PRIVATE
-	"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
-)
+#target_include_directories(glaux PRIVATE
+#	"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
+#)
 
 target_sources(glcommon PRIVATE
 	$<TARGET_OBJECTS:glaux>
@@ -1449,9 +1444,9 @@ target_compile_definitions(glcommon PRIVATE
 	#_M_IX86=1
 	DONT_COMPILE_REGISTER_ASSUME_JANK=1
 )
-target_include_directories(glcommon PRIVATE
-	"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
-)
+#target_include_directories(glcommon PRIVATE
+#	"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
+#)
 
 
 target_sources(3d_flying_objects PRIVATE
@@ -1518,7 +1513,7 @@ target_compile_definitions(3d_flying_objects PRIVATE
 )
 target_include_directories(3d_flying_objects AFTER PRIVATE
 	"screensavers\\COMMON"
-	"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
+	#"F:\\My Programming Stuff Expansion\\nt40_win95_sdk1996\\MSTOOLS\\INCLUDE"
 )
 target_link_libraries(3d_flying_objects 
 	opengl32.lib
