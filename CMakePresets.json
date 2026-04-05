@@ -34,26 +34,17 @@
             "name": "GNUmake-x86-Clang",
             "hidden": true,
             "generator": "MinGW Makefiles",
+            "toolchainFile": "dobby/WindowsToolchain/Windows.Clang.toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_SYSTEM_PROCESSOR": "X86",
                 "VS_PLATFORM_TOOLSET_VERSION": "14.29.30133",
                 "CMAKE_C_COMPILER_FRONTEND_VARIANT": "MSVC",
                 "CMAKE_CXX_COMPILER_FRONTEND_VARIANT": "MSVC"
-            },
-            "toolchainFile": "dobby/WindowsToolchain/Windows.Clang.toolchain.cmake"
+            }
         },
         {
             "name": "x86-Clang-Release-Debug-GNUmake",
             "inherits": ["x86-Clang-Release-Debug", "GNUmake-x86-Clang"]
-        },
-        {
-            "name": "x86-Clang-Release-Debug-dobby",
-            "inherits": ["x86-Clang-Release-Debug-GNUmake"],
-            "cacheVariables": {
-                "CMAKE_MAKE_PROGRAM": "D:/sdks/w64devkit-x86/bin/make.exe",
-                "VS_INSTALLATION_PATH": "D:/tools/Program Files/Microsoft Visual Studio/2022/BuildTools",
-                "CMAKE_ASM-ATT_COMPILER": "D:/sdks/w64devkit-x86/bin/as.exe"
-            }
         }
     ],
     "buildPresets": [
@@ -67,9 +58,9 @@
             }
         },
         {
-            "name": "UMTest1-dobby",
+            "name": "UMTest1",
             "inherits": ["base"],
-            "configurePreset": "x86-Clang-Release-Debug-dobby",
+            "configurePreset": "x86-Clang-Release-Debug-GNUmake",
             "targets": "UMTest1"
         }
     ]
