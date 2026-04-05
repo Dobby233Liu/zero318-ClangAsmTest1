@@ -2,6 +2,13 @@
     "version": 10,
     "configurePresets": [
         {
+            "name": "dobby",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_ASM-ATT_COMPILER": "D:/sdks/w64devkit-x86/bin/as.exe"
+            }
+        },
+        {
             "name": "dobby-GNUmake",
             "hidden": true,
             "cacheVariables": {
@@ -9,15 +16,8 @@
             }
         },
         {
-            "name": "dobby-GNUas",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_ASM-ATT_COMPILER": "D:/sdks/w64devkit-x86/bin/as.exe"
-            }
-        },
-        {
             "name": "x86-Clang-Release-Debug-dobby",
-            "inherits": ["dobby-GNUmake", "dobby-GNUas", "x86-Clang-Release-Debug-GNUmake"]
+            "inherits": ["dobby", "dobby-GNUmake", "x86-Clang-Release-Debug-GNUmake"]
         }
     ],
     "buildPresets": [
