@@ -723,6 +723,8 @@ endif()
 
 else()
 
+# This is only enough for building UMTest1
+
 include_directories(BEFORE SYSTEM "zero_include/")
 
 target_link_libraries(${EXE} "winmm.lib")
