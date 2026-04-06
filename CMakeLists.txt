@@ -1065,6 +1065,8 @@ if(NOT STATIC_CSOUND)
 #target_link_libraries(UMTest1 CSoundLib)
 endif()
 
+install(TARGETS UMTest1 RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
+
 add_library(UDoALGAsm OBJECT
 	"UDoaLG/render_turbo_udoalg.asm"
 )

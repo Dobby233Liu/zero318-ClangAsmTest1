@@ -6,7 +6,8 @@
             "hidden": true,
             "cacheVariables": {
                 "CMAKE_ASM-ATT_COMPILER": "D:/sdks/w64devkit-x86/bin/as.exe"
-            }
+            },
+            "installDir": "D:/fun/touhou/Touhou 18 - Unconnected Marketeers"
         },
         {
             "name": "dobby-GNUmake",
